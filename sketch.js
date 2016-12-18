@@ -25,12 +25,26 @@ function draw() {
 function Cell(i, j) {
     this.i = i;
     this.j = j;
+    this.walls = [true, true, true, true];
 
     this.show = function show() {
         var x = this.i * w;
         var y = this.j * w;
         stroke(255);
-        noFill();
-        rect(x, y, w, w);
+        if (this.walls[0]) {
+            line(x, y, x + w, y); //top
+        }
+        if (this.walls[1]) {
+            line(x, y, x, y + w); //left
+        }
+        if (this.walls[2]) {
+            line(x, y + w, x + w, y + w); //bottom
+        }
+        if (this.walls[3]) {
+            line(x + w, y + w, x + w, y); //right
+        }
+
+        // noFill();
+        // rect(x, y, w, w);
     }
 }
