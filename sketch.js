@@ -8,14 +8,15 @@ function setup() {
     cols = floor(width / w);
     rows = floor(height / w);
 
-    for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < cols; j++) {
-            var cell = new Cell(i, j);
+    for (var y = 0; y < rows; y++) {
+        for (var x = 0; x < cols; x++) {
+            var cell = new Cell(x, y);
             grid.push(cell);
         }
     }
 
     current = grid[0];
+    frameRate(4);
 }
 
 function draw() {
@@ -23,38 +24,21 @@ function draw() {
     for (var i = 0; i < grid.length; i++) {
         grid[i].show();
     }
-
+    //Recursive backtracker - Step 1
     current.visited = true;
+    var next = current.checkNeighbors();
+    if (next) {
+        next.visited = true;
+        current = next;
+    }
 }
 
-function Cell(i, j) {
-    this.i = i;
-    this.j = j;
-    this.walls = [true, true, true, true];
-    this.visited = false;
-
-    this.show = function show() {
-        var x = this.i * w;
-        var y = this.j * w;
-        stroke(255);
-        if (this.walls[0]) {
-            line(x, y, x + w, y); //top
-        }
-        if (this.walls[1]) {
-            line(x, y, x, y + w); //left
-        }
-        if (this.walls[2]) {
-            line(x, y + w, x + w, y + w); //bottom
-        }
-        if (this.walls[3]) {
-            line(x + w, y + w, x + w, y); //right
-        }
-
-        if (this.visited) {
-            fill('rgb(0,255,0)');
-            rect(x, y, w, w);
-        }
-
-
+//Formula to get the cell in the grid
+function index(i, j) {
+    //Checking the edge cases (cells with 3 neighbors)
+    if (!(i < 0 || j < 0 || i > cols - 1 || j > rows - 1)) {
+        return i + j * cols;
+    } else {
+        return -1;
     }
 }
