@@ -26,6 +26,7 @@ function draw() {
     }
     //Recursive backtracker - Step 1
     current.visited = true;
+    current.highlight();
     var next = current.checkNeighbors();
     if (next) {
         next.visited = true;

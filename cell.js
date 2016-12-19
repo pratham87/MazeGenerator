@@ -35,6 +35,14 @@ function Cell(i, j) {
         }
     }
 
+    this.highlight = function() {
+        var x = this.i * w;
+        var y = this.j * w;
+        noStroke();
+        fill(173, 255, 47, 100);
+        rect(x, y, w, w);
+    }
+
     this.show = function() {
         var x = this.i * w;
         var y = this.j * w;
@@ -59,8 +67,6 @@ function Cell(i, j) {
         }
     }
 }
-
-
 
 function removeWalls(a, b) {
     var x = a.i - b.i;
