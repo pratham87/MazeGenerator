@@ -29,6 +29,9 @@ function draw() {
     var next = current.checkNeighbors();
     if (next) {
         next.visited = true;
+
+        //Recursive backtracker - Step 2.1.2
+        removeWalls(current, next);
         current = next;
     }
 }

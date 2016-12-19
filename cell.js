@@ -13,7 +13,6 @@ function Cell(i, j) {
         var bottom = grid[index(i, j + 1)];
         var right = grid[index(i + 1, j)];
 
-        //Recursive backtracker - Step 2.1.2
         if (top && !top.visited) {
             neighbors.push(top);
         }
@@ -58,5 +57,27 @@ function Cell(i, j) {
             fill(50, 204, 100, 100);
             rect(x, y, w, w);
         }
+    }
+}
+
+
+
+function removeWalls(a, b) {
+    var x = a.i - b.i;
+    if (x === 1) {
+        a.walls[3] = false;
+        b.walls[1] = false;
+    } else if (x === -1) {
+        a.walls[1] = false;
+        b.walls[3] = false;
+    }
+
+    var y = a.j - b.j;
+    if (y === 1) {
+        a.walls[0] = false;
+        b.walls[2] = false;
+    } else if (y === -1) {
+        a.walls[2] = false;
+        b.walls[0] = false;
     }
 }
