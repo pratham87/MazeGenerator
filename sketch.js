@@ -1,5 +1,5 @@
 var rows, cols;
-var w = 40;
+var w = 20;
 var grid = [];
 var current; //current cell
 
