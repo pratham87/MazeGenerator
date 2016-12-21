@@ -3,6 +3,8 @@ var w = 20;
 var grid = [];
 var current; //current cell
 
+var stack = [];
+
 function setup() {
     createCanvas(400, 400);
     cols = floor(width / w);
@@ -16,7 +18,7 @@ function setup() {
     }
 
     current = grid[0];
-    frameRate(4);
+    // frameRate(4);
 }
 
 function draw() {
@@ -32,8 +34,13 @@ function draw() {
         next.visited = true;
 
         //Recursive backtracker - Step 2.1.2
+        stack.push(current);
+
+        //Recursive backtracker - Step 2.1.3
         removeWalls(current, next);
         current = next;
+    } else if (stack.length > 0) {
+        current = stack.pop();
     }
 }
 
